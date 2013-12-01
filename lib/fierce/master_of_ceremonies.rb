@@ -15,8 +15,8 @@ module Fierce
     end
 
     def custom_presenter
-      presenter_class = PresenterFinder.new(path).perform
-      return unless presenter_class 
+      return unless presenter_class = PresenterFinder.new(path).perform
+
       if presenter_class.instance_method(:initialize) == 1
         presenter_class.new(view_model)
       else
@@ -27,19 +27,19 @@ module Fierce
     def presenters
       collection = [
         DelegateGenerator::Controller.new(controller).generate,
-        locals_presenter,
         context
       ]
+      collection.unshift(locals_presenter) if locals_presenter
       collection.unshift(custom_presenter) if custom_presenter
       collection
     end
 
     def locals_presenter
+      return unless locals.size > 0
       Struct.new(*locals.keys.map(&:to_sym)).new(*locals.values)
     end
 
     def render
-      # must switch to view class that understands partials better
       Mustache.render(content, view_model).html_safe
     end
   end

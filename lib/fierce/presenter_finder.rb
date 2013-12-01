@@ -7,13 +7,16 @@ module Fierce
     end
 
     def root
-      Rails.root
+      Rails.root.to_s
+    end
+
+    def file_path(base_path)
+      "#{base_path}/#{path}.rb"
     end
 
     def found
-      @found = Fierce.paths.map do |p| 
-        file_path = "#{p}/#{path}.rb"
-        file_path if File.exist?(file_path)
+      @found = Fierce.paths.map do |base_path|
+        base_path if File.exist?(file_path(base_path))
       end.compact.first
     end
 
@@ -21,13 +24,16 @@ module Fierce
       presenter_class if found
     end
 
-    def class_path
-      found.gsub(Rails.root, '').gsub(/\.rb$/, '')
+    def path_to_classify
+      found
+        .gsub(root, '')
+        .gsub('/app', '')
+        .gsub(/\.rb$/, '') + "/#{path}"
     end
 
     def presenter_class
-      require found
-      class_path.classify.constantize
+      require file_path(found)
+      path_to_classify.classify.constantize
     end
   end
 end

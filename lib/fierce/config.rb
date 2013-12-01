@@ -1,7 +1,7 @@
 module Fierce
   def self.add_path(*additional_paths)
     additional_paths.each do |path|
-      paths << path
+      paths << path.to_s
     end
   end
 
