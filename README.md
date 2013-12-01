@@ -2,6 +2,8 @@
 
 Fierce is opinionate view logic for Rails. Templates are written in HTML and tucked into the views directory. View logic is handled by presenters, that have their own top level app directory. These presenters are plain old Ruby objects, not some special subclass of Fierceness. 
 
+![Fierce Conchita Wurst](http://eurovisionireland.files.wordpress.com/2013/10/conchita-wurst-internal-selection.jpg)
+
 ## Installation
 
 Add this line to your application's Gemfile:
