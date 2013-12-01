@@ -94,6 +94,25 @@ Given the setup previously described, helpers, controllers and all:
       end
     end 
 
+#### What about Layouts?
+
+Layouts can be mustache too, with a presenter of their own. This is how to yield the layout content, in a very ERB-styled way:
+
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <title>Fierce Layout</title>
+      </head>
+      <body>
+        {{{yield}}}
+      </body>
+    </html>
+
+Notice the triple curlies: `{{{yield}}}`. They allow the html to be dumped directly into the layout without being escaped in such a way that all the tags show up as text. That's the only trick.
+
+What about using yield with an argument, you ask? Well that seems like a terrible practice, but is should work ok too: `{{{yield.head}}}`.
+
+
 ## Contributing
 
 1. Fork it

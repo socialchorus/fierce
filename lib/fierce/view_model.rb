@@ -15,5 +15,9 @@ module Fierce
     def respond_to?(method, include_private=false)
       super(method, include_private) || @presenters.any?{|p| p.respond_to?(method)}
     end
+
+    def yield(area = :layout)
+      content_for(area)
+    end
   end
 end
