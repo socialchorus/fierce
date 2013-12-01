@@ -29,7 +29,7 @@ If there a presenter is not found, the mustache gets rendered from the logic it 
 Given a mustache template like this:
 
     <h1>Be Fierce</h1>
-    <p>s{{from_instance_variables}}</p>
+    <p>{{from_instance_variables}}</p>
     <p>{{from_helpers}}</p>
     <p>{{from_your_presenter}}</p>
 
@@ -84,7 +84,7 @@ Given the setup previously described, helpers, controllers and all:
       attr_reader :default_presenter
 
       def initialize(default_presenter)
-        @default_presenter
+        @default_presenter = default_presenter
       end
 
       def contatenated_stuff
