@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe Fierce::PresenterFinder do
   let(:fixture_presenter_path) { File.dirname(__FILE__) + "/custom_presenters" }
+  
   before do
-    Rails.stub(:root).and_return(File.dirname(__FILE__))
     Fierce.clear_paths
     Fierce.add_path(fixture_presenter_path)
   end
