@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Fierce Dummy</title>
+    {{! anywhere we are generating html and inserting, we need to use triple curlies}}
+    
+    {{{csrf_meta_tags}}}
+    {{{stylesheets}}}
+    {{{javascripts}}}
+  </head>
+  <body>
+    {{{yield}}}
+  </body>
+</html>

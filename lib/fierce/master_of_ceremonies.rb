@@ -1,9 +1,9 @@
 module Fierce
   class MasterOfCeremonies
-    attr_reader    :content, :path, :locals, :controller, :context
+    attr_reader    :template, :path, :locals, :controller, :context
 
-    def initialize(content, path, locals, controller, context)
-      @content =    content
+    def initialize(template, path, locals, controller, context)
+      @template =   template
       @path =       path
       @locals =     locals
       @controller = controller
@@ -15,21 +15,27 @@ module Fierce
     end
 
     def custom_presenter
+      return @custom_presenter if @custom_presenter
       return unless presenter_class = PresenterFinder.new(path).perform
 
-      if presenter_class.instance_method(:initialize) == 1
-        presenter_class.new(view_model)
+      @custom_presenter = if presenter_class.instance_method(:initialize).arity == 1
+        presenter_class.new(ViewModel.new(*base_presenters))
       else
         presenter_class.new
       end
     end
 
-    def presenters
+    def base_presenters
       collection = [
         DelegateGenerator::Controller.new(controller).generate,
         context
       ]
       collection.unshift(locals_presenter) if locals_presenter
+      collection
+    end
+
+    def presenters
+      collection = base_presenters
       collection.unshift(custom_presenter) if custom_presenter
       collection
     end
@@ -40,7 +46,11 @@ module Fierce
     end
 
     def render
-      Mustache.render(content, view_model).html_safe
+      Renderer.new(self).render(template, view_model).html_safe
+    end
+
+    def partial(name)
+      partial = PartialFinder.new(name, path, custom_presenter, context).perform
     end
   end
 end

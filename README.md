@@ -115,6 +115,25 @@ Notice the triple curlies: `{{{yield}}}`. They allow the html to be dumped direc
 
 What about using yield with an argument, you ask? Well that seems like a terrible practice, but is should work ok too: `{{{yield.head}}}`.
 
+#### Partials
+
+Mustache views are logicless and cleans. What that means for partials is that a name, not a path needs to be passed in the template:
+
+    {{> my_partial}}
+
+For partials in the same directory as the view being rendered, this nameing works great.
+
+The most powerful partials are shared amongst different templates and are not located in the current view directory. In your custom presenter, you can create a #partials method that returns a hash, mapping names to paths.
+
+    def partials
+      {
+        my_partial: '/reports/show',
+        something_tiny: 'here'
+      }
+    end 
+
+Fierce will find the partials given a map to the paths. What is more, presenters are pure ruby objects and can share this logic amongst views.
+
 
 ## Contributing
 
