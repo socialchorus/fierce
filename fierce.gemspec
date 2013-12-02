@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["developers@socialchorus.com"]
   spec.description   = %q{Fierce, opinionate view logic for Rails}
   spec.summary       = %q{Fierce, opinionate view logic for Rails}
-  spec.homepage      = ""
+  spec.homepage      = "http://github.com/socialchorus.com/fierce"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
