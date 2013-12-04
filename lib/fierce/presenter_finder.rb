@@ -10,24 +10,18 @@ module Fierce
       "#{base_path}/#{path}.rb"
     end
 
-    def found_base_path
-      @found = Fierce.paths.map do |base_path|
-        base_path if File.exist?(file_path(base_path))
-      end.compact.first
+    def found?
+      Fierce.paths.any? do |base_path|
+        File.exist?(file_path(base_path))
+      end
     end
 
     def perform
-      presenter_class if found_base_path
-    end
-
-    def path_to_classify
-      top_module = found_base_path.split('/').last
-      "#{top_module}/#{path}"
+      presenter_class if found?
     end
 
     def presenter_class      
-      require file_path(found_base_path)
-      path_to_classify.classify.constantize
+      "::#{path.classify}".constantize
     end
   end
 end

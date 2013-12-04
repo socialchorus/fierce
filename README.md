@@ -51,7 +51,7 @@ And a helper somewhere that has this logic:
 
 And a presenter with a little something too:
 
-    class Presenters::Home::Index
+    class Home::Index
       def from_your_presenters
         "Use your presenters. It is a pure Ruby class of your own. Mixins and inheritance just work. One presenter per view. Go!"
       end
@@ -83,7 +83,7 @@ Classes that initialize with a single argument will be passed a default presente
 
 Given the setup previously described, helpers, controllers and all:
 
-    class Presenters::Home::Index
+    class Home::Index
       attr_reader :default_presenter
 
       def initialize(default_presenter)

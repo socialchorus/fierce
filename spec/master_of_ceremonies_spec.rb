@@ -23,7 +23,7 @@ describe Fierce::MasterOfCeremonies do
 
   before do
     Rails.stub(:root).and_return(File.dirname(__FILE__))
-    Fierce.add_path(File.dirname(__FILE__) + "/custom_presenters")
+    Fierce.add_path(File.dirname(__FILE__) + "/support/custom_presenters")
   end
 
   describe '#render' do

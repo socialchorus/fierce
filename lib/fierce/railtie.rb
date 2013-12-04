@@ -4,7 +4,7 @@ module Fierce
       Fierce.add_path (Rails.root.to_s + "/app/presenters") # default opinionation
 
       Fierce.paths.each do |path|
-        app.config.autoload_paths << path
+        app.config.eager_load_paths << path
       end
     end
   end
