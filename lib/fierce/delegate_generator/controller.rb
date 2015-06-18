@@ -20,9 +20,7 @@ module Fierce
       end
 
       def ivar_names
-        controller.instance_variables - 
-          controller.protected_instance_variables -
-          excluded_ivars
+        controller.instance_variables - excluded_ivars
       end
 
       def excluded_ivars
