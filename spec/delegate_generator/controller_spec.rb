@@ -9,10 +9,6 @@ describe Fierce::DelegateGenerator::Controller do
     delegate.available.should == 'im for you!'
   end
 
-  it 'excludes protected instance variable' do
-    delegate.should_not respond_to(:protected_ivar)
-  end
-
   it 'excludes @template' do
     delegate.should_not respond_to(:template)
   end

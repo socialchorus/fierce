@@ -5,10 +5,6 @@ class FauxController
     @template = 'not here'
     @protected_ivar = 'also missing'
   end
-
-  def protected_instance_variables
-    [:@protected_ivar]
-  end
 end
 
 def controller
