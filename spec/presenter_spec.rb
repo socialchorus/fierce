@@ -6,7 +6,7 @@ describe Fierce::Presenter do
   }
   let(:presenter) {
     class Presenter < Fierce::Presenter
-      delegations :params, :my_helper
+      delegate :params, :my_helper, to: :view_model
     end
 
     Presenter.new(view_model)
